@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+input{
+	width:100%;
+	padding:12px;
+	border:1px solid #ccc;
+	boder-radius:4px;
+	box-sizing :border-box;
+	magin-top:6px;
+	margin-bottom:16px;
+}
+input[type=submit]{
+	background-color:#055A6D;
+	color:white;
+}
+.container{
+	background-color:#f1f1f1;
+	padding:20px;
+	}
+
+#message{
+	display:none;
+	background:#f1f1f1f1;
+	color:#000;
+	position:relative;
+	padding:20px;
+	margin-top :10px;
+}
+#message p{
+	padding: 10px 35px;
+	font-size: 18px;
+}
+.valid{
+	color:green;
+}
+.valid:before{
+	position:relative ;
+	left: -35px;
+	content:"♥" ;
+}
+
+.invalid{
+	color:red;
+}
+.invalid:before{
+	position: relative;
+	left: -35px;
+	content: "!";
+}
+</style>
+</head>
+<body>
+	<h3>password validation</h3>
+	<p>try to submit the form.</p>
+	<div class="container">
+		<form action="/action_page.php">
+			<label for="usrname">username</label>
+			<input type="text"id="usrname"name="usrname" required>
+
+					<label for="psw">password</label>
+					<input type="text" id="psw" name="psw"
+					pattern="(?=.*d) (?=.*[a-z])(?=.*[A-Z]).{8,})" required>
+			<input type = "submit" value="submit">
+</form>
+</div>
+	<div id="message">
+		<h3>password must contain the following:</h3>
+		<p id="letter"class="invalid" >a<b>lowercase letter</b></p>
+		<p id="capital" class="invalid">a<b>capital(uppercase)</b>letter</p>
+		<p id="number"class="invalid" >a<b>number</b></p>
+		<p id="length"class="invalid"> minimum<b>8 char </b></p>
+	</div>
+
+<script>
+	var myinput=document.getElementById("psw");
+	var letter=document.getElementById("letter");
+	var capital=document.getElementById("capital");
+	var number=document.getElementById("number");
+	var length=document.getElementById("length");
+
+myinput.onfocus=function(){
+document.getElementById("message").style.display="block";
+}
+myinput.onblur=function(){
+	document.getElementById("message").style.display="none";
+}
+myinput.onkeyup=function(){
+	var lowercasletters=/[a-z]/g;
+	if(myinput.value.match(lowercasletters)){
+		letter.classList.remove("invalid");
+		letter.classList.add("valid");
+
+		}
+	else{
+		letter.classList.remove("valid");
+		letter.classList.add("invalid");
+	}
+
+	var uppercasletters=/[A-Z]/g;
+	if(myinput.value.match(uppercasletters)){
+		capital.classList.remove("invalid");
+		capital.classList.add("valid");
+
+		}
+	else{
+		capital.classList.remove("valid");
+		capital.classList.add("invalid");
+	}
+
+	var numbers=/[0-9]/g;
+	if(myinput.value.match(number)){
+		number.classList.remove("invalid");
+		number.classList.add("valid");
+	} else{
+		number.classList.remove("valid");
+		number.classList.add("invalid");
+	}
+
+if(myinput.value.length>=8){
+	length.classList.remove("invalid");
+	length.classList.add("valid");
+}else{
+	length.classList.remove("valid");
+	length.classList.add("invalid");
+	}
+}
+		</script>
+		</body>
+		</html>	
